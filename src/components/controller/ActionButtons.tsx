@@ -1,3 +1,4 @@
+import React from 'react';
 import { Gamepad, Headphones, Disc, Clock } from 'lucide-react';
 import { Button } from '@/components/controller/types';
 
@@ -7,12 +8,10 @@ interface ActionButtonsProps {
 }
 
 const ActionButtons = ({ activeButton, onButtonClick }: ActionButtonsProps) => {
-  // Enhanced click handlers with simplified event type
-  const handleButtonClick = (button: Button, e: any) => {
-    if (e) {
-      e.preventDefault(); // Prevent default browser behavior
-      e.stopPropagation(); // Stop event bubbling
-    }
+  // Enhanced click handlers
+  const handleButtonClick = (button: Button, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log(`Clicking action button: ${button}`);
     onButtonClick(button);
   };
@@ -25,7 +24,6 @@ const ActionButtons = ({ activeButton, onButtonClick }: ActionButtonsProps) => {
           className={`absolute w-8 h-8 rounded-full top-0 left-1/2 -translate-x-1/2 -translate-y-1/4 
           ${activeButton === 'y' ? 'bg-arcade-cyan border-2 border-gray-800' : 'bg-arcade-cyan hover:bg-arcade-cyan/80'}`}
           onClick={(e) => handleButtonClick('y', e)}
-          onMouseDown={(e) => handleButtonClick('y', e)}
           aria-label="Experience"
         >
           <Clock size={16} className="absolute inset-0 m-auto text-black" />
@@ -36,7 +34,6 @@ const ActionButtons = ({ activeButton, onButtonClick }: ActionButtonsProps) => {
           className={`absolute w-8 h-8 rounded-full top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 
           ${activeButton === 'x' ? 'bg-arcade-pink border-2 border-gray-800' : 'bg-arcade-pink hover:bg-arcade-pink/80'}`}
           onClick={(e) => handleButtonClick('x', e)}
-          onMouseDown={(e) => handleButtonClick('x', e)}
           aria-label="Skills"
         >
           <Disc size={16} className="absolute inset-0 m-auto text-black" />
@@ -47,7 +44,6 @@ const ActionButtons = ({ activeButton, onButtonClick }: ActionButtonsProps) => {
           className={`absolute w-8 h-8 rounded-full top-1/2 right-0 -translate-y-1/2 translate-x-1/4 
           ${activeButton === 'b' ? 'bg-arcade-orange border-2 border-gray-800' : 'bg-arcade-orange hover:bg-arcade-orange/80'}`}
           onClick={(e) => handleButtonClick('b', e)}
-          onMouseDown={(e) => handleButtonClick('b', e)}
           aria-label="Contact"
         >
           <Headphones size={16} className="absolute inset-0 m-auto text-black" />
@@ -58,7 +54,6 @@ const ActionButtons = ({ activeButton, onButtonClick }: ActionButtonsProps) => {
           className={`absolute w-8 h-8 rounded-full bottom-0 left-1/2 -translate-x-1/2 translate-y-1/4 
           ${activeButton === 'a' ? 'bg-arcade-purple border-2 border-gray-800' : 'bg-arcade-purple hover:bg-arcade-purple/80'}`}
           onClick={(e) => handleButtonClick('a', e)}
-          onMouseDown={(e) => handleButtonClick('a', e)}
           aria-label="About"
         >
           <Gamepad size={16} className="absolute inset-0 m-auto text-black" />

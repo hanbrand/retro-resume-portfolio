@@ -1,3 +1,4 @@
+import React from 'react';
 import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from 'lucide-react';
 
 export type Direction = 'up' | 'down' | 'left' | 'right' | 'neutral';
@@ -9,12 +10,10 @@ interface DPadProps {
 }
 
 const DPad = ({ activeDirection, keyPressed, onDirectionClick }: DPadProps) => {
-  // Enhanced click handlers with simplified event type
-  const handleDirectionClick = (direction: Direction, e: any) => {
-    if (e) {
-      e.preventDefault(); // Prevent default browser behavior
-      e.stopPropagation(); // Stop event bubbling
-    }
+  // Enhanced click handlers
+  const handleDirectionClick = (direction: Direction, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log(`Clicking D-pad direction: ${direction}`);
     onDirectionClick(direction);
   };
@@ -51,7 +50,6 @@ const DPad = ({ activeDirection, keyPressed, onDirectionClick }: DPadProps) => {
         {/* Left button - enhanced for navigation */}
         <button 
           onClick={(e) => handleDirectionClick('left', e)}
-          onMouseDown={(e) => handleDirectionClick('left', e)}
           className={`absolute w-5 h-5 left-0 top-1/2 -translate-y-1/2 -translate-x-0 flex items-center justify-center bg-gray-300 hover:bg-gray-400 ${
             activeDirection === 'left' || keyPressed === 'left' ? 'text-arcade-cyan' : 'text-gray-600'
           }`}
@@ -63,7 +61,6 @@ const DPad = ({ activeDirection, keyPressed, onDirectionClick }: DPadProps) => {
         {/* Right button - enhanced for navigation */}
         <button 
           onClick={(e) => handleDirectionClick('right', e)}
-          onMouseDown={(e) => handleDirectionClick('right', e)}
           className={`absolute w-5 h-5 right-0 top-1/2 -translate-y-1/2 translate-x-0 flex items-center justify-center bg-gray-300 hover:bg-gray-400 ${
             activeDirection === 'right' || keyPressed === 'right' ? 'text-arcade-cyan' : 'text-gray-600'
           }`}
