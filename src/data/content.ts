@@ -74,10 +74,8 @@ export const apps: Record<string, AppData> = {
         </div>
         <hr/>
         <p>
-          I like building systems that turn messy real-world signals &mdash; tickets, news,
-          markets &mdash; into something a human or a model can actually act on.
-          Lately I've been working on bias evaluation pipelines for LLMs, finance-domain
-          sentiment models, and a little bit of low-level OS kernel hacking on the side.
+          I really enjoy taking chaotic data&mdash;like support tickets or stock market feeds&mdash;and building the pipelines that make it actually useful for a human or a model to act on.
+          Recently, my focus has been split between applied AI&mdash;like auditing LLMs for political bias&mdash;and getting building out agent workflows and tools.
         </p>
         <p style="font-size: 12px; color: #555;">
           Tip: double-click <strong>My Resume</strong> for the full story, or check out

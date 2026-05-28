@@ -21,8 +21,8 @@ export const initBoot = (onComplete: () => void) => {
     bootContainer.innerHTML = `
       <div class="boot-screen">
         <img src="/assets/boot/boot-wordmark.webp" alt="Windows XP" class="boot-logo" />
-        <div class="loading-bar-container">
-          <img src="/assets/boot/loading.webp" alt="Loading..." class="loading-bar" />
+        <div class="loading-bar-container" role="progressbar" aria-label="Loading Windows XP">
+          <div class="loading-bar" aria-hidden="true"></div>
         </div>
       </div>
     `;
