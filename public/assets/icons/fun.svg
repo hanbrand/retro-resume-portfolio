@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="folderTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE08A"/>
+      <stop offset="100%" stop-color="#E9B23A"/>
+    </linearGradient>
+    <linearGradient id="folderBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD566"/>
+      <stop offset="100%" stop-color="#C98A1F"/>
+    </linearGradient>
+  </defs>
+
+  <path d="M4 18 h18 l5 5 h33 a2 2 0 0 1 2 2 v6 h-58 v-11 a2 2 0 0 1 2 -2 z"
+        fill="url(#folderTop)" stroke="#7A5210" stroke-width="1"/>
+
+  <path d="M2 27 h60 v25 a4 4 0 0 1 -4 4 h-52 a4 4 0 0 1 -4 -4 z"
+        fill="url(#folderBody)" stroke="#7A5210" stroke-width="1"/>
+
+  <g fill="#5B3208">
+    <ellipse cx="22" cy="38" rx="3.2" ry="4"/>
+    <ellipse cx="32" cy="35" rx="3.2" ry="4"/>
+    <ellipse cx="42" cy="38" rx="3.2" ry="4"/>
+    <ellipse cx="48" cy="46" rx="2.8" ry="3.4"/>
+    <ellipse cx="16" cy="46" rx="2.8" ry="3.4"/>
+    <path d="M22 47 q10 -10 20 0 q4 6 -3 8 q-7 2 -14 0 q-7 -2 -3 -8 z"/>
+  </g>
+</svg>

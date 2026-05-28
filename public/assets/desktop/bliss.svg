@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#2A6BB7"/>
+      <stop offset="35%"  stop-color="#4A8FCB"/>
+      <stop offset="70%"  stop-color="#86B9E0"/>
+      <stop offset="100%" stop-color="#C9E1F0"/>
+    </linearGradient>
+
+    <linearGradient id="backHill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#A6CC6E"/>
+      <stop offset="100%" stop-color="#5C9433"/>
+    </linearGradient>
+
+    <linearGradient id="midHill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#86BB47"/>
+      <stop offset="100%" stop-color="#3C7715"/>
+    </linearGradient>
+
+    <linearGradient id="frontHill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#7CB23C"/>
+      <stop offset="60%"  stop-color="#4A8A1D"/>
+      <stop offset="100%" stop-color="#2C5F0D"/>
+    </linearGradient>
+
+    <radialGradient id="cloud" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="65%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="soften" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1200" fill="url(#sky)"/>
+
+  <g opacity="0.95">
+    <ellipse cx="220"  cy="220" rx="240" ry="42" fill="url(#cloud)"/>
+    <ellipse cx="310"  cy="240" rx="160" ry="28" fill="url(#cloud)"/>
+    <ellipse cx="640"  cy="160" rx="260" ry="40" fill="url(#cloud)"/>
+    <ellipse cx="720"  cy="180" rx="170" ry="26" fill="url(#cloud)"/>
+    <ellipse cx="1100" cy="120" rx="200" ry="30" fill="url(#cloud)"/>
+    <ellipse cx="1450" cy="260" rx="300" ry="46" fill="url(#cloud)"/>
+    <ellipse cx="1540" cy="280" rx="180" ry="30" fill="url(#cloud)"/>
+    <ellipse cx="1780" cy="150" rx="170" ry="28" fill="url(#cloud)"/>
+
+    <ellipse cx="120"  cy="430" rx="220" ry="22" fill="url(#cloud)" opacity="0.7"/>
+    <ellipse cx="900"  cy="380" rx="280" ry="22" fill="url(#cloud)" opacity="0.7"/>
+    <ellipse cx="1680" cy="450" rx="260" ry="22" fill="url(#cloud)" opacity="0.7"/>
+  </g>
+
+  <path d="M0,760 C260,700 520,720 780,740 C1040,760 1300,720 1560,730 C1700,735 1830,720 1920,710 L1920,820 L0,820 Z"
+        fill="url(#backHill)" filter="url(#soften)"/>
+
+  <path d="M0,820 C200,760 460,800 760,820 C1060,840 1320,790 1620,810 C1760,820 1860,800 1920,795 L1920,900 L0,900 Z"
+        fill="url(#midHill)"/>
+
+  <path d="M0,950
+           C160,820 380,780 640,800
+           C900,820 1120,900 1380,910
+           C1620,920 1800,880 1920,870
+           L1920,1200 L0,1200 Z"
+        fill="url(#frontHill)"/>
+
+  <g fill="#3C7715" opacity="0.35">
+    <path d="M0,980 C200,930 460,940 720,960 C980,980 1220,970 1480,975 C1660,978 1820,965 1920,960 L1920,1010 L0,1010 Z"/>
+  </g>
+</svg>
