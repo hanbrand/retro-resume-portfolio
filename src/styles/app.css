@@ -745,11 +745,27 @@ body.start-open .start-button .start-button-image {
   font-family: var(--xp-font);
   font-size: 12px;
 }
+.contact-form button[disabled] {
+  color: #777;
+  cursor: wait;
+}
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
 .contact-status {
   min-height: 16px;
   margin: 0;
   color: #2455a6;
   font-size: 11px;
+}
+.contact-status[data-state="error"] {
+  color: #b00000;
+}
+.contact-status[data-state="success"] {
+  color: #1f6b2a;
 }
 
 /* Fun / Dog gallery */

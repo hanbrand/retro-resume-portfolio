@@ -147,33 +147,57 @@ class WindowManager {
     if (appId === 'contact-window') {
       const form = winEl.querySelector<HTMLFormElement>('[data-contact-form]');
       const status = winEl.querySelector<HTMLElement>('[data-contact-status]');
+      const submitButton = winEl.querySelector<HTMLButtonElement>('[data-contact-submit]');
 
-      form?.addEventListener('submit', (e) => {
+      const setStatus = (message: string, type: 'idle' | 'error' | 'success' = 'idle') => {
+        if (!status) return;
+        status.textContent = message;
+        status.dataset.state = type;
+      };
+
+      form?.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const formData = new FormData(form);
         const name = String(formData.get('name') || '').trim();
         const email = String(formData.get('email') || '').trim();
         const message = String(formData.get('message') || '').trim();
+        const company = String(formData.get('company') || '').trim();
 
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          setStatus('Please enter a valid email address.', 'error');
+          return;
+        }
         if (!message) {
-          status!.textContent = 'Please write a message first.';
+          setStatus('Please write a message first.', 'error');
           return;
         }
 
-        const body = [
-          name && `Name: ${name}`,
-          email && `Email: ${email}`,
-          '',
-          message
-        ].filter(Boolean).join('\n');
+        submitButton?.setAttribute('disabled', 'true');
+        setStatus('Sending...', 'idle');
 
-        const mailtoUrl =
-          `mailto:brandonh4n@gmail.com?subject=${encodeURIComponent('Hello from your XP site')}` +
-          `&body=${encodeURIComponent(body)}`;
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, message, company })
+          });
+          const result = await response.json().catch(() => null);
 
-        if (status) status.textContent = 'Opening your email app...';
-        window.location.href = mailtoUrl;
+          if (!response.ok || !result?.ok) {
+            throw new Error(result?.message || 'Message could not be sent right now.');
+          }
+
+          form.reset();
+          setStatus('Message sent. Thanks for reaching out!', 'success');
+        } catch (error) {
+          setStatus(
+            error instanceof Error ? error.message : 'Message could not be sent right now.',
+            'error'
+          );
+        } finally {
+          submitButton?.removeAttribute('disabled');
+        }
       });
     }
   }

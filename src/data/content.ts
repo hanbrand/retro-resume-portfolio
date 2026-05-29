@@ -239,10 +239,11 @@ export const apps: Record<string, AppData> = {
         <hr/>
         <form class="contact-form" data-contact-form>
           <input type="text" name="name" placeholder="Your Name" autocomplete="name" />
-          <input type="email" name="email" placeholder="Your Email" autocomplete="email" />
+          <input type="email" name="email" placeholder="Your Email" autocomplete="email" required />
           <textarea rows="4" name="message" placeholder="Message" required></textarea>
-          <button type="submit" class="xp-button">Send via Email</button>
-          <p class="contact-status" data-contact-status></p>
+          <input type="text" name="company" class="contact-honeypot" tabindex="-1" autocomplete="off" />
+          <button type="submit" class="xp-button" data-contact-submit>Send Message</button>
+          <p class="contact-status" data-contact-status role="status" aria-live="polite"></p>
         </form>
       </div>
     `
