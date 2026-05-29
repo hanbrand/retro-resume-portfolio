@@ -13,19 +13,44 @@ const json = (res, statusCode, payload) => {
   res.end(JSON.stringify(payload));
 };
 
+const parseRawBody = (raw) => (raw ? JSON.parse(raw) : {});
+
 const readBody = async (req) => {
+  if (Buffer.isBuffer(req.body)) return parseRawBody(req.body.toString('utf8'));
   if (typeof req.body === 'object' && req.body !== null) return req.body;
-  if (typeof req.body === 'string') return JSON.parse(req.body);
+  if (typeof req.body === 'string') return parseRawBody(req.body);
 
-  let raw = '';
-  for await (const chunk of req) {
-    raw += chunk;
-    if (Buffer.byteLength(raw, 'utf8') > MAX_BODY_BYTES) {
-      throw new Error('Request body is too large.');
-    }
-  }
+  if (typeof req.on !== 'function') return {};
 
-  return raw ? JSON.parse(raw) : {};
+  return new Promise((resolve, reject) => {
+    let raw = '';
+    let settled = false;
+
+    req.on('data', (chunk) => {
+      if (settled) return;
+      raw += chunk;
+      if (Buffer.byteLength(raw, 'utf8') > MAX_BODY_BYTES) {
+        settled = true;
+        reject(new Error('Request body is too large.'));
+      }
+    });
+
+    req.on('end', () => {
+      if (settled) return;
+      settled = true;
+      try {
+        resolve(parseRawBody(raw));
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    req.on('error', (error) => {
+      if (settled) return;
+      settled = true;
+      reject(error);
+    });
+  });
 };
 
 const clean = (value, maxLength) =>
