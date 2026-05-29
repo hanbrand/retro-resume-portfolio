@@ -168,11 +168,16 @@ export default async function handler(req, res) {
       to
     });
 
-    const payload = { ok: false, message: 'Message could not be sent right now.' };
+    const payload = {
+      ok: false,
+      message: 'Message could not be sent right now.',
+      detail: error.message,
+      code: error.name,
+      statusCode: error.statusCode
+    };
     if (envValue('CONTACT_DEBUG_ERRORS') === 'true') {
-      payload.detail = error.message;
-      payload.code = error.name;
-      payload.statusCode = error.statusCode;
+      payload.from = from;
+      payload.to = to;
     }
 
     return json(res, 502, payload);
