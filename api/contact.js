@@ -5,7 +5,7 @@ const MAX_NAME_LENGTH = 80;
 const MAX_EMAIL_LENGTH = 160;
 const MAX_MESSAGE_LENGTH = 3_000;
 const DEFAULT_TO_EMAIL = 'brandonh4n@gmail.com';
-const DEFAULT_FROM_EMAIL = 'Portfolio Contact <contact@thehanbrand.dev>';
+const DEFAULT_FROM_EMAIL = 'contact@thehanbrand.dev';
 
 const envValue = (name, fallback = '') => {
   const raw = process.env[name] || fallback;
@@ -64,6 +64,14 @@ const clean = (value, maxLength) =>
     .replace(/\s+/g, ' ')
     .trim()
     .slice(0, maxLength);
+
+const normalizeSender = (value) => {
+  const raw = envValue('CONTACT_FROM_EMAIL', value);
+  const angleMatch = raw.match(/<([^<>\s]+@[^<>\s]+\.[^<>\s]+)>/);
+  if (angleMatch?.[1]) return `Portfolio Contact <${angleMatch[1]}>`;
+  if (isEmail(raw)) return raw;
+  return DEFAULT_FROM_EMAIL;
+};
 
 const cleanMessage = (value) =>
   String(value || '')
@@ -144,7 +152,7 @@ export default async function handler(req, res) {
   }
 
   const to = envValue('CONTACT_TO_EMAIL', DEFAULT_TO_EMAIL);
-  const from = envValue('CONTACT_FROM_EMAIL', DEFAULT_FROM_EMAIL);
+  const from = normalizeSender(DEFAULT_FROM_EMAIL);
   const { text, html } = buildEmailBody({ name, email, message });
   const subjectName = name || 'Portfolio visitor';
 
