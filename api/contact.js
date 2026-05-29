@@ -7,6 +7,12 @@ const MAX_MESSAGE_LENGTH = 3_000;
 const DEFAULT_TO_EMAIL = 'brandonh4n@gmail.com';
 const DEFAULT_FROM_EMAIL = 'Portfolio Contact <contact@thehanbrand.dev>';
 
+const envValue = (name, fallback = '') => {
+  const raw = process.env[name] || fallback;
+  const withoutKey = raw.startsWith(`${name}=`) ? raw.slice(name.length + 1) : raw;
+  return withoutKey.trim().replace(/^['"]|['"]$/g, '');
+};
+
 const json = (res, statusCode, payload) => {
   res.statusCode = statusCode;
   res.setHeader('Content-Type', 'application/json');
@@ -132,13 +138,13 @@ export default async function handler(req, res) {
     return json(res, 400, { ok: false, message: 'Please write a message first.' });
   }
 
-  const resendApiKey = process.env.RESEND_API_KEY;
+  const resendApiKey = envValue('RESEND_API_KEY');
   if (!resendApiKey) {
     return json(res, 500, { ok: false, message: 'Contact form is not configured yet.' });
   }
 
-  const to = process.env.CONTACT_TO_EMAIL || DEFAULT_TO_EMAIL;
-  const from = process.env.CONTACT_FROM_EMAIL || DEFAULT_FROM_EMAIL;
+  const to = envValue('CONTACT_TO_EMAIL', DEFAULT_TO_EMAIL);
+  const from = envValue('CONTACT_FROM_EMAIL', DEFAULT_FROM_EMAIL);
   const { text, html } = buildEmailBody({ name, email, message });
   const subjectName = name || 'Portfolio visitor';
 
@@ -154,7 +160,22 @@ export default async function handler(req, res) {
   });
 
   if (error) {
-    return json(res, 502, { ok: false, message: 'Message could not be sent right now.' });
+    console.error('Resend contact form send failed', {
+      name: error.name,
+      message: error.message,
+      statusCode: error.statusCode,
+      from,
+      to
+    });
+
+    const payload = { ok: false, message: 'Message could not be sent right now.' };
+    if (envValue('CONTACT_DEBUG_ERRORS') === 'true') {
+      payload.detail = error.message;
+      payload.code = error.name;
+      payload.statusCode = error.statusCode;
+    }
+
+    return json(res, 502, payload);
   }
 
   return json(res, 200, { ok: true });
