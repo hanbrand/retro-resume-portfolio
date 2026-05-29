@@ -78,9 +78,9 @@ export const apps: Record<string, AppData> = {
           Recently, my focus has been split between applied AI&mdash;like auditing LLMs for political bias&mdash;and getting building out agent workflows and tools.
         </p>
         <p style="font-size: 12px; color: #555;">
-          Tip: double-click <strong>My Resume</strong> for the full story, or check out
-          <strong>My Projects</strong>. The <strong>Fun</strong> folder has dog photos &mdash;
-          required viewing.
+          Tip: double-click <strong>My Resume</strong> for the full story, or open
+          <strong>Contact Me</strong> to get in touch. The <strong>Fun</strong> folder has
+          dog photos &mdash; required viewing.
         </p>
       </div>
     `
@@ -99,7 +99,7 @@ export const apps: Record<string, AppData> = {
             &nbsp;&middot;&nbsp; (626) 404-4082
             &nbsp;&middot;&nbsp; <a href="mailto:brandonh4n@gmail.com">brandonh4n@gmail.com</a>
             &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/brandonh4n" target="_blank" rel="noopener">LinkedIn</a>
-            &nbsp;&middot;&nbsp; <a href="https://github.com/brandonh4n" target="_blank" rel="noopener">GitHub</a>
+            &nbsp;&middot;&nbsp; <a href="https://github.com/hanbrand" target="_blank" rel="noopener">GitHub</a>
           </p>
         </div>
 
@@ -234,14 +234,15 @@ export const apps: Record<string, AppData> = {
           <li><strong>Phone:</strong> <a href="tel:+16264044082">(626) 404-4082</a></li>
           <li><strong>Website:</strong> <a href="https://www.thehanbrand.dev" target="_blank" rel="noopener">thehanbrand.dev</a></li>
           <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/brandonh4n" target="_blank" rel="noopener">linkedin.com/in/brandonh4n</a></li>
-          <li><strong>GitHub:</strong> <a href="https://github.com/brandonh4n" target="_blank" rel="noopener">github.com/brandonh4n</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/hanbrand" target="_blank" rel="noopener">github.com/hanbrand</a></li>
         </ul>
         <hr/>
-        <form class="contact-form" onsubmit="event.preventDefault(); window.location.href='mailto:brandonh4n@gmail.com?subject=' + encodeURIComponent('Hello from your XP site') + '&body=' + encodeURIComponent(this.message.value);">
-          <input type="text" name="name" placeholder="Your Name" />
-          <input type="email" name="email" placeholder="Your Email" />
-          <textarea rows="4" name="message" placeholder="Message"></textarea>
+        <form class="contact-form" data-contact-form>
+          <input type="text" name="name" placeholder="Your Name" autocomplete="name" />
+          <input type="email" name="email" placeholder="Your Email" autocomplete="email" />
+          <textarea rows="4" name="message" placeholder="Message" required></textarea>
           <button type="submit" class="xp-button">Send via Email</button>
+          <p class="contact-status" data-contact-status></p>
         </form>
       </div>
     `

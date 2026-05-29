@@ -33,7 +33,7 @@ export class StartMenu {
         <div class="start-right">
            <div class="start-item"><a href="mailto:brandonh4n@gmail.com">E-mail Brandon</a></div>
            <div class="start-item"><a href="https://www.thehanbrand.dev" target="_blank" rel="noopener">My Website</a></div>
-           <div class="start-item"><a href="https://github.com/brandonh4n" target="_blank" rel="noopener">GitHub</a></div>
+           <div class="start-item"><a href="https://github.com/hanbrand" target="_blank" rel="noopener">GitHub</a></div>
            <div class="start-item"><a href="https://www.linkedin.com/in/brandonh4n" target="_blank" rel="noopener">LinkedIn</a></div>
            <div class="separator"></div>
            <div class="start-item"><a href="/assets/resume/Brandon-Han-Resume-2026.pdf" target="_blank" rel="noopener">Open Resume PDF</a></div>

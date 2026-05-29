@@ -62,6 +62,7 @@ export const initBoot = (onComplete: () => void) => {
               <span class="user-status">ML / AI Engineer</span>
             </div>
           </div>
+          <p class="login-instruction">Click the profile icon to explore the desktop.</p>
         </div>
       </div>
       <div class="login-footer">

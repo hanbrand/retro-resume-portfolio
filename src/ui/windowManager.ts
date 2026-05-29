@@ -143,6 +143,39 @@ class WindowManager {
         if (e.target === lightbox) closeLightbox();
       });
     }
+
+    if (appId === 'contact-window') {
+      const form = winEl.querySelector<HTMLFormElement>('[data-contact-form]');
+      const status = winEl.querySelector<HTMLElement>('[data-contact-status]');
+
+      form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const name = String(formData.get('name') || '').trim();
+        const email = String(formData.get('email') || '').trim();
+        const message = String(formData.get('message') || '').trim();
+
+        if (!message) {
+          status!.textContent = 'Please write a message first.';
+          return;
+        }
+
+        const body = [
+          name && `Name: ${name}`,
+          email && `Email: ${email}`,
+          '',
+          message
+        ].filter(Boolean).join('\n');
+
+        const mailtoUrl =
+          `mailto:brandonh4n@gmail.com?subject=${encodeURIComponent('Hello from your XP site')}` +
+          `&body=${encodeURIComponent(body)}`;
+
+        if (status) status.textContent = 'Opening your email app...';
+        window.location.href = mailtoUrl;
+      });
+    }
   }
 
   close(id: string) {
