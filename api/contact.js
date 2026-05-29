@@ -7,6 +7,8 @@ const MAX_MESSAGE_LENGTH = 3_000;
 const DEFAULT_TO_EMAIL = 'brandonh4n@gmail.com';
 const DEFAULT_FROM_EMAIL = 'contact@thehanbrand.dev';
 
+// Vercel env vars are easy to paste with quotes or KEY= prefixes; normalize
+// them here so small dashboard formatting mistakes do not break delivery.
 const envValue = (name, fallback = '') => {
   const raw = process.env[name] || fallback;
   const withoutKey = raw.startsWith(`${name}=`) ? raw.slice(name.length + 1) : raw;
@@ -21,6 +23,8 @@ const json = (res, statusCode, payload) => {
 
 const parseRawBody = (raw) => (raw ? JSON.parse(raw) : {});
 
+// Vercel may provide req.body already parsed, while local smoke tests use a
+// stream. Support both shapes so the endpoint is easier to test and debug.
 const readBody = async (req) => {
   if (Buffer.isBuffer(req.body)) return parseRawBody(req.body.toString('utf8'));
   if (typeof req.body === 'object' && req.body !== null) return req.body;
@@ -65,6 +69,8 @@ const clean = (value, maxLength) =>
     .trim()
     .slice(0, maxLength);
 
+// Resend rejects malformed From headers. If CONTACT_FROM_EMAIL is pasted in an
+// odd format, extract the address or fall back to the verified domain sender.
 const normalizeSender = (value) => {
   const raw = envValue('CONTACT_FROM_EMAIL', value);
   const angleMatch = raw.match(/<([^<>\s]+@[^<>\s]+\.[^<>\s]+)>/);
@@ -130,6 +136,7 @@ export default async function handler(req, res) {
   }
 
   const company = clean(body.company, 120);
+  // Honeypot: real visitors never see this field, but many bots fill it.
   if (company) {
     return json(res, 200, { ok: true });
   }
@@ -177,6 +184,8 @@ export default async function handler(req, res) {
     });
 
     const payload = { ok: false, message: 'Message could not be sent right now.' };
+    // Keep public errors generic. CONTACT_DEBUG_ERRORS can be enabled briefly
+    // in Vercel when debugging Resend configuration.
     if (envValue('CONTACT_DEBUG_ERRORS') === 'true') {
       payload.detail = error.message;
       payload.code = error.name;

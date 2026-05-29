@@ -149,6 +149,8 @@ class WindowManager {
       const status = winEl.querySelector<HTMLElement>('[data-contact-status]');
       const submitButton = winEl.querySelector<HTMLButtonElement>('[data-contact-submit]');
 
+      // Contact submissions stay inside the XP window and are sent through the
+      // Vercel function; the static email links remain available as a fallback.
       const setStatus = (message: string, type: 'idle' | 'error' | 'success' = 'idle') => {
         if (!status) return;
         status.textContent = message;
