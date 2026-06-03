@@ -1,3 +1,6 @@
+import { mountMinesweeper } from '../ui/apps/minesweeper';
+import { mountPaint } from '../ui/apps/paint';
+
 export interface DesktopIcon {
   id: string;
   title: string;
@@ -23,6 +26,18 @@ export const desktopIcons: DesktopIcon[] = [
     title: 'Contact Me',
     icon: '/assets/icons/contact.webp',
     component: 'contact-window'
+  },
+  {
+    id: 'paint',
+    title: 'Paint',
+    icon: '/assets/icons/paint.svg',
+    component: 'paint-window'
+  },
+  {
+    id: 'minesweeper',
+    title: 'Minesweeper',
+    icon: '/assets/icons/minesweeper.svg',
+    component: 'minesweeper-window'
   },
   {
     id: 'fun',
@@ -52,10 +67,11 @@ const dogGallery = dogPhotos
   )
   .join('');
 
-interface AppData {
+export interface AppData {
   title: string;
   icon?: string;
   content: string;
+  mount?: (root: HTMLElement) => void | (() => void);
 }
 
 export const apps: Record<string, AppData> = {
@@ -96,7 +112,6 @@ export const apps: Record<string, AppData> = {
           <p class="resume-tagline">ML / AI Engineer &middot; Applied NLP, Computer Vision, Production ML Systems</p>
           <p class="resume-contact">
             <a href="https://www.thehanbrand.dev" target="_blank" rel="noopener">thehanbrand.dev</a>
-            &nbsp;&middot;&nbsp; (626) 404-4082
             &nbsp;&middot;&nbsp; <a href="mailto:brandonh4n@gmail.com">brandonh4n@gmail.com</a>
             &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/brandonh4n" target="_blank" rel="noopener">LinkedIn</a>
             &nbsp;&middot;&nbsp; <a href="https://github.com/hanbrand" target="_blank" rel="noopener">GitHub</a>
@@ -231,7 +246,6 @@ export const apps: Record<string, AppData> = {
         <p>Best reached by email. Always happy to talk ML systems, NLP eval, or applied AI roles.</p>
         <ul class="contact-list">
           <li><strong>Email:</strong> <a href="mailto:brandonh4n@gmail.com">brandonh4n@gmail.com</a></li>
-          <li><strong>Phone:</strong> <a href="tel:+16264044082">(626) 404-4082</a></li>
           <li><strong>Website:</strong> <a href="https://www.thehanbrand.dev" target="_blank" rel="noopener">thehanbrand.dev</a></li>
           <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/brandonh4n" target="_blank" rel="noopener">linkedin.com/in/brandonh4n</a></li>
           <li><strong>GitHub:</strong> <a href="https://github.com/hanbrand" target="_blank" rel="noopener">github.com/hanbrand</a></li>
@@ -247,6 +261,20 @@ export const apps: Record<string, AppData> = {
         </form>
       </div>
     `
+  },
+
+  'paint-window': {
+    title: 'Paint',
+    icon: '/assets/icons/paint.svg',
+    content: '<div class="paint-app" data-paint-app></div>',
+    mount: mountPaint
+  },
+
+  'minesweeper-window': {
+    title: 'Minesweeper',
+    icon: '/assets/icons/minesweeper.svg',
+    content: '<div class="minesweeper-app" data-minesweeper-app></div>',
+    mount: mountMinesweeper
   },
 
   'fun-window': {

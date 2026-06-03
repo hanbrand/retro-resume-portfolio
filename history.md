@@ -2,6 +2,33 @@
 
 Patch-note style notes for the major changes made during the Windows XP portfolio migration.
 
+## 2026-06-03
+
+### Desktop Interactions And XP Apps
+
+- Added movable desktop icons on desktop/fine-pointer viewports, including persisted per-browser icon positions through `localStorage`.
+- Added Windows-style drag selection on the desktop so users can highlight multiple icons with a cursor selection box.
+- Kept mobile intentionally touch-native: desktop icons stay tap-friendly, windows remain fullscreen, and desktop-only drag/selection behavior is disabled on phone-sized/coarse-pointer screens.
+- Added a reusable interactive app lifecycle hook for XP windows so apps can mount behaviors and clean up timers/listeners when closed or when the shell is restarted.
+- Added XP-style Paint with canvas drawing, colors, tool selection, brush sizing, undo/redo, clear, and image save support.
+- Added XP-style Minesweeper with Beginner/Intermediate/Expert presets, first-click-safe generation, flagging, chording, timer, mine counter, reset states, and a mobile-friendly flag mode.
+- Added small local SVG icons for Paint and Minesweeper without adding runtime dependencies or large media assets.
+
+### Security And Privacy Cleanup
+
+- Removed the phone number from the visible resume window mockup and Contact Me window, including the `tel:` link.
+- Confirmed the built site no longer renders the phone number in the XP Resume or Contact windows.
+- Ran a quick security pass covering dependency audit, contact endpoint behavior, risky frontend patterns, and build output searches.
+- Tightened the contact endpoint debug path so optional debug responses no longer expose sender or recipient email addresses in public JSON.
+- Verified the downloadable resume PDF still contains the phone number and intentionally left that PDF asset unchanged for a later resume-file refresh.
+
+### Verification Notes
+
+- Rebuilt the site with `npm run build`.
+- Ran `npm audit --audit-level=moderate` and confirmed `0 vulnerabilities`.
+- Ran `git diff --check` and confirmed no whitespace errors.
+- Browser-checked desktop icon dragging, icon position persistence after reload, drag selection, Start menu app launch, Paint, Minesweeper, mobile fullscreen windows, and mobile Minesweeper flag mode.
+
 ## 2026-05-29
 
 ### Contact Form With Resend

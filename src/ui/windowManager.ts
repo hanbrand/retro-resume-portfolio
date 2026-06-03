@@ -7,6 +7,7 @@ interface WindowState {
   minimized: boolean;
   maximized: boolean;
   zIndex: number;
+  cleanup?: () => void;
 }
 
 class WindowManager {
@@ -14,24 +15,37 @@ class WindowManager {
   private baseZIndex = 100;
   private activeZIndex = 1000;
   private desktopContainer: HTMLElement | null = null;
+  private taskbarListenerAttached = false;
 
   init(container: HTMLElement) {
+    this.resetWindows();
     this.desktopContainer = container;
     
     // Listen for taskbar clicks
-    document.addEventListener('taskbar-window-click', (e: any) => {
-      const id = e.detail.id;
-      const win = this.windows.find(w => w.id === id);
-      if (win) {
-        if (win.minimized) {
-          this.restore(id);
-        } else if (win.element.classList.contains('active')) {
-          this.minimize(id);
-        } else {
-          this.focus(id);
+    if (!this.taskbarListenerAttached) {
+      document.addEventListener('taskbar-window-click', (e: Event) => {
+        const id = (e as CustomEvent<{ id: string }>).detail.id;
+        const win = this.windows.find(w => w.id === id);
+        if (win) {
+          if (win.minimized) {
+            this.restore(id);
+          } else if (win.element.classList.contains('active')) {
+            this.minimize(id);
+          } else {
+            this.focus(id);
+          }
         }
-      }
+      });
+      this.taskbarListenerAttached = true;
+    }
+  }
+
+  private resetWindows() {
+    this.windows.forEach((win) => {
+      win.cleanup?.();
+      win.element.remove();
     });
+    this.windows = [];
   }
 
   open(appId: string) {
@@ -95,13 +109,17 @@ class WindowManager {
     this.makeDraggable(winEl, titleBar);
 
     this.desktopContainer.appendChild(winEl);
+
+    const windowBody = winEl.querySelector<HTMLElement>('.window-body');
+    const cleanup = windowBody ? appData.mount?.(windowBody) || undefined : undefined;
     
     this.windows.push({
       id: appId,
       element: winEl,
       minimized: false,
       maximized: false,
-      zIndex: this.baseZIndex
+      zIndex: this.baseZIndex,
+      cleanup
     });
 
     taskbar.addWindow(appId, appData.title, iconPath, true);
@@ -207,6 +225,7 @@ class WindowManager {
   close(id: string) {
     const win = this.windows.find(w => w.id === id);
     if (win && win.element.parentNode) {
+      win.cleanup?.();
       win.element.parentNode.removeChild(win.element);
       this.windows = this.windows.filter(w => w.id !== id);
       taskbar.removeWindow(id);

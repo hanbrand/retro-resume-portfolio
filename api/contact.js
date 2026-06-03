@@ -178,9 +178,7 @@ export default async function handler(req, res) {
     console.error('Resend contact form send failed', {
       name: error.name,
       message: error.message,
-      statusCode: error.statusCode,
-      from,
-      to
+      statusCode: error.statusCode
     });
 
     const payload = { ok: false, message: 'Message could not be sent right now.' };
@@ -190,8 +188,6 @@ export default async function handler(req, res) {
       payload.detail = error.message;
       payload.code = error.name;
       payload.statusCode = error.statusCode;
-      payload.from = from;
-      payload.to = to;
     }
 
     return json(res, 502, payload);

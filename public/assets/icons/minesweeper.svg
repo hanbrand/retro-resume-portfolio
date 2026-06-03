@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="Minesweeper">
+  <rect width="48" height="48" rx="6" fill="#c0c0c0"/>
+  <path d="M8 8h32v32H8z" fill="#d8d8d8" stroke="#666" stroke-width="2"/>
+  <path d="M8 18h32M8 28h32M18 8v32M28 8v32" stroke="#888" stroke-width="2"/>
+  <circle cx="24" cy="24" r="7" fill="#111"/>
+  <path d="M24 12v24M12 24h24M15 15l18 18M33 15L15 33" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="24" cy="24" r="3" fill="#f33"/>
+</svg>
