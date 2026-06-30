@@ -38,6 +38,12 @@ const clamp = (value: number, min: number, max: number) =>
 const rectsIntersect = (a: DOMRect, b: DOMRect) =>
   a.left <= b.right && a.right >= b.left && a.top <= b.bottom && a.bottom >= b.top;
 
+const iconPositionsOverlap = (a: IconPosition, b: IconPosition) =>
+  a.x < b.x + ICON_WIDTH &&
+  a.x + ICON_WIDTH > b.x &&
+  a.y < b.y + ICON_HEIGHT &&
+  a.y + ICON_HEIGHT > b.y;
+
 export const initDesktop = () => {
   const app = document.querySelector<HTMLDivElement>('#app')!;
 
@@ -111,6 +117,21 @@ export const initDesktop = () => {
       x: clamp(position.x, 0, Math.max(0, bounds.width - ICON_WIDTH)),
       y: clamp(position.y, 0, Math.max(0, bounds.height - ICON_HEIGHT))
     };
+  };
+
+  const getOpenDefaultPosition = (startIndex: number, occupiedPositions: IconPosition[]) => {
+    const maxAttempts = Math.max(desktopIcons.length * 4, 64);
+
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+      const candidate = clampPosition(getDefaultPosition(startIndex + attempt));
+      const isOccupied = occupiedPositions.some((position) =>
+        iconPositionsOverlap(candidate, position)
+      );
+
+      if (!isOccupied) return candidate;
+    }
+
+    return clampPosition(getDefaultPosition(startIndex));
   };
 
   const applyIconPosition = (id: string) => {
@@ -286,6 +307,8 @@ export const initDesktop = () => {
     e.preventDefault();
   };
 
+  const occupiedIconPositions: IconPosition[] = [];
+
   desktopIcons.forEach((icon) => {
     const iconEl = document.createElement('div');
     iconEl.className = 'desktop-icon';
@@ -342,14 +365,14 @@ export const initDesktop = () => {
     });
 
     if (isInteractiveDesktop) {
-      const defaultPosition = getDefaultPosition(iconElements.size);
       const savedPosition = savedPositions[icon.id];
       const nextPosition = savedPosition
         ? clampPosition(savedPosition)
-        : clampPosition(defaultPosition);
+        : getOpenDefaultPosition(iconElements.size, occupiedIconPositions);
 
       iconEl.classList.add('positioned');
       iconPositions.set(icon.id, nextPosition);
+      occupiedIconPositions.push(nextPosition);
       iconElements.set(icon.id, iconEl);
       applyIconPosition(icon.id);
     } else {

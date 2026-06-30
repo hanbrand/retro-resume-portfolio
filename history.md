@@ -2,6 +2,23 @@
 
 Patch-note style notes for the major changes made during the Windows XP portfolio migration.
 
+## 2026-06-30
+
+### Resume And Publications Refresh
+
+- Updated the embedded XP resume window to match the latest `Resume 2026.docx` wording, ordering, education details, and project bullets.
+- Re-exported the downloadable resume PDF at `public/assets/resume/Brandon-Han-Resume-2026.pdf`.
+- Added a Windows XP-style `Publications` desktop folder with five verified research publication links.
+- Added an Explorer-inspired publications window with menu, toolbar, address bar, task pane, scrollable publication shortcuts, and a status bar.
+- Added a local `publications.svg` folder icon so the desktop reads as an XP folder without pulling in external assets.
+- Improved desktop icon placement so newly added icons avoid overlapping a returning visitor's existing `localStorage` icon positions.
+
+### Verification Notes
+
+- Rebuilt the site with `npm run build`.
+- Browser-checked the Publications folder locally on desktop and mobile viewport widths.
+- Confirmed the Publications folder renders all five links with the expected publisher/preprint URLs.
+
 ## 2026-06-03
 
 ### Desktop Interactions And XP Apps

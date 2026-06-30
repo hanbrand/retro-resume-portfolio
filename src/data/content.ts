@@ -22,6 +22,12 @@ export const desktopIcons: DesktopIcon[] = [
     component: 'resume-window'
   },
   {
+    id: 'publications',
+    title: 'Publications',
+    icon: '/assets/icons/publications.svg',
+    component: 'publications-window'
+  },
+  {
     id: 'contact',
     title: 'Contact Me',
     icon: '/assets/icons/contact.webp',
@@ -67,6 +73,58 @@ const dogGallery = dogPhotos
   )
   .join('');
 
+const publications = [
+  {
+    title: 'Optimization of a micro-scale air-liquid-interface model of human proximal airway epithelium for moderate throughput drug screening for SARS-CoV-2',
+    venue: 'Respiratory Research',
+    year: '2025',
+    type: 'Journal article',
+    url: 'https://link.springer.com/article/10.1186/s12931-025-03095-y'
+  },
+  {
+    title: 'High Throughput Screening with a Primary Human Mucociliary Airway Model Identifies a Small Molecule with Anti-SARS-CoV-2 Activity',
+    venue: 'bioRxiv',
+    year: '2024',
+    type: 'Preprint',
+    url: 'https://www.biorxiv.org/content/10.1101/2024.05.09.593388v1'
+  },
+  {
+    title: 'Antiviral drug screen identifies DNA-damage response inhibitor as potent blocker of SARS-CoV-2 replication',
+    venue: 'Cell Reports',
+    year: '2021',
+    type: 'Journal article',
+    url: 'https://www.cell.com/cell-reports/fulltext/S2211-1247(21)00254-0'
+  },
+  {
+    title: 'Commercial immunoglobulin products contain cross-reactive but not neutralizing antibodies against SARS-CoV-2',
+    venue: 'Journal of Allergy and Clinical Immunology',
+    year: '2021',
+    type: 'Journal article',
+    url: 'https://www.jacionline.org/article/S0091-6749(20)31765-6/fulltext'
+  },
+  {
+    title: 'An activation-based high throughput screen identifies caspase-10 inhibitors',
+    venue: 'bioRxiv',
+    year: '2024',
+    type: 'Preprint',
+    url: 'https://www.biorxiv.org/content/10.1101/2024.12.15.625925v1'
+  }
+];
+
+const publicationShortcuts = publications
+  .map(
+    (publication, i) => `
+        <a class="publication-shortcut" href="${publication.url}" target="_blank" rel="noopener" aria-label="Open ${publication.title}">
+          <span class="publication-doc-icon" aria-hidden="true"></span>
+          <span class="publication-copy">
+            <span class="publication-title">${publication.title}</span>
+            <span class="publication-meta">${publication.venue} &middot; ${publication.year} &middot; ${publication.type}</span>
+            <span class="publication-file">Publication_${String(i + 1).padStart(2, '0')}.url</span>
+          </span>
+        </a>`
+  )
+  .join('');
+
 export interface AppData {
   title: string;
   icon?: string;
@@ -109,7 +167,7 @@ export const apps: Record<string, AppData> = {
       <div class="window-content-inner resume">
         <div class="resume-header">
           <h2>Brandon Han</h2>
-          <p class="resume-tagline">ML / AI Engineer &middot; Applied NLP, Computer Vision, Production ML Systems</p>
+          <p class="resume-tagline">ML / AI Engineer &middot; Machine Learning &middot; Applied NLP &middot; Agentic Workflows</p>
           <p class="resume-contact">
             <a href="https://www.thehanbrand.dev" target="_blank" rel="noopener">thehanbrand.dev</a>
             &nbsp;&middot;&nbsp; <a href="mailto:brandonh4n@gmail.com">brandonh4n@gmail.com</a>
@@ -122,12 +180,12 @@ export const apps: Record<string, AppData> = {
           <h3>Education</h3>
           <div class="job">
             <h4>University of Southern California <span class="loc">Los Angeles, CA</span></h4>
-            <p class="meta">Master of Science &middot; January 2024 &ndash; May 2026</p>
+            <p class="meta">Master of Science, Computer Science &middot; January 2024 &ndash; May 2026</p>
             <p class="muted">Coursework: Advanced Databases, Algorithms, Machine Learning, Deep Learning &amp; Optimization, Web Technologies</p>
           </div>
           <div class="job">
             <h4>University of California, Los Angeles <span class="loc">Los Angeles, CA</span></h4>
-            <p class="meta">Bachelor of Science &middot; January 2017 &ndash; December 2019</p>
+            <p class="meta">Bachelor of Science, Biochemistry &middot; September 2017 &ndash; December 2019</p>
           </div>
         </div>
 
@@ -135,10 +193,41 @@ export const apps: Record<string, AppData> = {
           <h3>Technical Skills</h3>
           <ul class="skills">
             <li><strong>Languages:</strong> Python, Java, C++, C, JavaScript, TypeScript, SQL, Go</li>
-            <li><strong>ML &amp; NLP:</strong> PyTorch, TensorFlow, Hugging Face Transformers, RoBERTa, scikit-learn</li>
+            <li><strong>ML &amp; NLP:</strong> PyTorch, TensorFlow, Hugging Face Transformers, BERT, scikit-learn</li>
             <li><strong>Data &amp; Evaluation:</strong> Pandas, NumPy, VADER, Model Evaluation</li>
             <li><strong>Engineering:</strong> Flask, FastAPI, Node.js, React, PostgreSQL, MySQL, MongoDB, Docker, AWS, Git</li>
           </ul>
+        </div>
+
+        <div class="resume-section">
+          <h3>Projects</h3>
+          <div class="job">
+            <h4>Bias Induced News Generation with LLMs <span class="loc">PyTorch, Hugging Face, BERT</span></h4>
+            <p class="meta">Machine Learning Engineer &middot; May 2026</p>
+            <ul>
+              <li>Engineered an automated evaluation pipeline to expose and quantify political bias across multiple LLM architectures.</li>
+              <li>Built a pipeline for the ingestion, cleaning, and labeling of multi-partisan news snippets for LLM evaluation.</li>
+              <li>Processed 14,000 biased articles to automate the generation and scoring of 1,700 test cases.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <h4>Stock Sentiment Tracker <span class="loc">Python, Hugging Face, Flask, SHAP</span></h4>
+            <p class="meta">Machine Learning Engineer &middot; November 2025</p>
+            <ul>
+              <li>Fine-tuned FinBERT for informal finance text by relabeling StockEmotions with Twitter-RoBERTa and training on social-market language.</li>
+              <li>Improved accuracy on informal finance text by 57% against baseline setup, then benchmarked using MSE and MAE.</li>
+              <li>Implemented SHAP to inspect model predictions and identify finance-specific sentiment cues that were easy to miss in standard language models.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <h4>Weenix Operating System Kernel Development <span class="loc">C, x86 Assembly, GNU Make, QEMU</span></h4>
+            <p class="meta">Software Engineer &middot; February 2025</p>
+            <ul>
+              <li>Engineered foundational system components for a 32-bit architecture.</li>
+              <li>Developed process and thread life-cycle management, context switching, thread bootstrap, and scheduler queue primitives.</li>
+              <li>Integrated software with emulated hardware (QEMU) using C and Assembly, navigating complex system constraints, physical memory allocation, and concurrency.</li>
+            </ul>
+          </div>
         </div>
 
         <div class="resume-section">
@@ -157,39 +246,8 @@ export const apps: Record<string, AppData> = {
             <p class="meta">January 2019 &ndash; December 2023</p>
             <ul>
               <li>Led rollout of GPU-backed compute and multi-vendor lab systems, translating wet-lab constraints into implementation plans, integration tests, and researcher onboarding.</li>
-              <li>Secured $1.2M in infrastructure funding for automation, imaging, and compute platforms through technical proposals and systems planning.</li>
+              <li>Developed architecture and deployed automated workflows, imaging, and compute platforms through technical proposals and systems planning.</li>
               <li>Contributed to 5 peer-reviewed publications involving ML implementation, imaging pipelines, and research infrastructure.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="resume-section">
-          <h3>Projects</h3>
-          <div class="job">
-            <h4>Bias Induced News Generation with LLMs <span class="loc">PyTorch, Hugging Face, RoBERTa</span></h4>
-            <p class="meta">Machine Learning Engineer &middot; May 2026</p>
-            <ul>
-              <li>Engineered an automated evaluation pipeline to expose and quantify political bias across multiple LLM architectures.</li>
-              <li>Built a pipeline for the ingestion, cleaning, and labeling of multi-partisan news snippets for LLM evaluation.</li>
-              <li>Processed 14,000 biased articles to automate the generation and scoring of 1,700 test cases.</li>
-            </ul>
-          </div>
-          <div class="job">
-            <h4>Stock Sentiment Tracker <span class="loc">Python, Hugging Face, Flask, SHAP</span></h4>
-            <p class="meta">Machine Learning Engineer &middot; November 2025</p>
-            <ul>
-              <li>Fine-tuned FinBERT for informal finance text by relabeling StockEmotions with Twitter-RoBERTa and training on social-market language.</li>
-              <li>Improved accuracy on informal finance text by 57% against baseline, benchmarked with MSE and MAE.</li>
-              <li>Used SHAP to inspect predictions and surface finance-specific sentiment cues that standard language models miss.</li>
-            </ul>
-          </div>
-          <div class="job">
-            <h4>Weenix Operating System Kernel Development <span class="loc">C, x86 Assembly, GNU Make, QEMU</span></h4>
-            <p class="meta">Software Engineer &middot; February 2025</p>
-            <ul>
-              <li>Engineered foundational system components for a 32-bit architecture.</li>
-              <li>Developed process and thread life-cycle management, context switching, thread bootstrap, and scheduler queue primitives.</li>
-              <li>Integrated software with emulated hardware (QEMU) using C and Assembly, navigating concurrency and physical memory allocation.</li>
             </ul>
           </div>
         </div>
@@ -212,7 +270,7 @@ export const apps: Record<string, AppData> = {
             <div class="project-icon">&#128218;</div>
             <h4>Bias-Induced News Gen</h4>
             <p>LLM bias evaluation pipeline across multiple architectures. 14k articles &rarr; 1,700 scored test cases.</p>
-            <p class="tech">PyTorch &middot; Hugging Face &middot; RoBERTa</p>
+            <p class="tech">PyTorch &middot; Hugging Face &middot; BERT</p>
           </div>
           <div class="project-card">
             <div class="project-icon">&#128200;</div>
@@ -233,6 +291,52 @@ export const apps: Record<string, AppData> = {
             <p class="tech">TypeScript &middot; Vite</p>
           </div>
         </div>
+      </div>
+    `
+  },
+
+  'publications-window': {
+    title: 'Publications',
+    icon: '/assets/icons/publications.svg',
+    content: `
+      <div class="window-content-inner publications">
+        <div class="explorer-menu">
+          <span>File</span>
+          <span>Edit</span>
+          <span>View</span>
+          <span>Favorites</span>
+          <span>Tools</span>
+          <span>Help</span>
+        </div>
+        <div class="explorer-toolbar">
+          <button type="button" class="explorer-nav" aria-label="Back">Back</button>
+          <button type="button" class="explorer-nav" aria-label="Forward">Forward</button>
+          <span class="explorer-separator"></span>
+          <span class="explorer-tool">Search</span>
+          <span class="explorer-tool">Folders</span>
+          <span class="explorer-tool">Views</span>
+        </div>
+        <div class="explorer-address">
+          <span>Address</span>
+          <span class="explorer-address-field">C:\\Documents and Settings\\Brandon\\My Documents\\Publications</span>
+        </div>
+        <div class="publications-explorer">
+          <div class="publication-sidebar">
+            <div class="publication-panel">
+              <h3>Publication Tasks</h3>
+              <p>5 research links</p>
+            </div>
+            <div class="publication-panel">
+              <h3>Details</h3>
+              <p>Brandon Han</p>
+              <p>Research publications</p>
+            </div>
+          </div>
+          <div class="publication-list" aria-label="Publication links">
+            ${publicationShortcuts}
+          </div>
+        </div>
+        <div class="publication-status">5 objects</div>
       </div>
     `
   },
