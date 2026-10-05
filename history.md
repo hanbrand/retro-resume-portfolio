@@ -2,6 +2,15 @@
 
 Patch-note style notes for the major changes made during the Windows XP portfolio migration.
 
+## 2026-10-05
+
+### Resume Content Refresh
+
+- Updated the resume headline, skills, experience, projects, and section order from `Brandon_Han_Resume_2026.pdf`.
+- Replaced the Weenix resume entry with the accessibility-focused AI Chrome extension and refreshed all job and project bullets.
+- Aligned About Me, welcome-screen role, contact introduction, and page description with the software engineering focus.
+- Replaced the existing downloadable PDF with the supplied file and verified matching SHA-256 hashes.
+
 ## 2026-06-30
 
 ### Resume And Publications Refresh
