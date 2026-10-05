@@ -142,14 +142,14 @@ export const apps: Record<string, AppData> = {
           <img src="/assets/user/me.jpg" alt="Brandon Han" class="about-photo" />
           <div>
             <h2>Hi, I'm Brandon Han.</h2>
-            <p><strong>ML / AI Engineer</strong> &mdash; Applied NLP, Computer Vision, and Production ML Systems.</p>
+            <p><strong>Software Engineer</strong> &mdash; Specializing in AI/ML, Automated Systems, and Backend Development.</p>
             <p>Based in Los Angeles, CA. M.S. in Computer Science from USC (May 2026), B.S. from UCLA.</p>
           </div>
         </div>
         <hr/>
         <p>
           I really enjoy taking chaotic data&mdash;like support tickets or stock market feeds&mdash;and building the pipelines that make it actually useful for a human or a model to act on.
-          Recently, my focus has been split between applied AI&mdash;like auditing LLMs for political bias&mdash;and getting building out agent workflows and tools.
+          My work spans AI support triage, automated research systems, LLM evaluation, and accessible web tools, with a focus on the backend services and workflows that make them useful.
         </p>
         <p style="font-size: 12px; color: #555;">
           Tip: double-click <strong>My Resume</strong> for the full story, or open
@@ -167,13 +167,73 @@ export const apps: Record<string, AppData> = {
       <div class="window-content-inner resume">
         <div class="resume-header">
           <h2>Brandon Han</h2>
-          <p class="resume-tagline">ML / AI Engineer &middot; Machine Learning &middot; Applied NLP &middot; Agentic Workflows</p>
+          <p class="resume-tagline">Software Engineer | Specializing in AI/ML, Automated Systems, and Backend Development</p>
           <p class="resume-contact">
             <a href="https://www.thehanbrand.dev" target="_blank" rel="noopener">thehanbrand.dev</a>
             &nbsp;&middot;&nbsp; <a href="mailto:brandonh4n@gmail.com">brandonh4n@gmail.com</a>
             &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/brandonh4n" target="_blank" rel="noopener">LinkedIn</a>
             &nbsp;&middot;&nbsp; <a href="https://github.com/hanbrand" target="_blank" rel="noopener">GitHub</a>
           </p>
+        </div>
+
+        <div class="resume-section">
+          <h3>Technical Skills</h3>
+          <ul class="skills">
+            <li><strong>Programming Languages:</strong> Python, Java, C++, C, JavaScript, TypeScript, SQL, Go</li>
+            <li><strong>Backend / Databases:</strong> FastAPI, Flask, Node.js, PostgreSQL, MySQL, MongoDB, REST APIs</li>
+            <li><strong>AI / Data / ML:</strong> Computer Vision, OpenAI APIs, PyTorch, TensorFlow, Hugging Face, scikit-learn, Pandas, NumPy</li>
+            <li><strong>Cloud &amp; DevOps:</strong> AWS (S3, ECS, Fargate, ECR, EC2, Bedrock, Textract), Docker, Git, CI/CD, React</li>
+          </ul>
+        </div>
+
+        <div class="resume-section">
+          <h3>Experience</h3>
+          <div class="job">
+            <h4>Wasabi Cloud Technologies <span class="loc">Boston, MA</span></h4>
+            <p class="meta">AI Engineering Intern &middot; June 2025 &ndash; August 2025</p>
+            <ul>
+              <li>Engineered an automated support-triage tool via FastAPI, leveraging RAG architecture and OpenAI APIs to retrieve relevant case information and generate structured diagnostic reports, reducing weekly triage meeting times by 33%</li>
+              <li>Processed support tickets and internal documents using Pandas to construct labeled datasets for downstream LLM fine-tuning</li>
+            </ul>
+          </div>
+          <div class="job">
+            <h4>California NanoSystems Institute <span class="loc">Los Angeles, CA</span></h4>
+            <p class="meta">Research Operations Manager &amp; Lead Automation Engineer &middot; January 2019 &ndash; December 2023</p>
+            <ul>
+              <li>Integrated robotic handling using computer vision and low-latency C++ hardware interfaces to support automated experiment workflows for over 200+ research customers via modular workflows and pipelines that involve automated liquid handling, microscopes, and temperature-sensitive storage</li>
+              <li>Deployed PyTorch and TensorFlow inference on GPU-backed Docker containers that analyzed approximately 1,500 images at full resolution per run in 20 minutes</li>
+              <li>Developed and customized Python-backed software workflows using segmentation, object detection, and classical CV to support customer-specific cell-screening and pharmacology workflows</li>
+              <li>Secured $1.2M in infrastructure funding through grant proposals and contributed to 5 peer-reviewed publications involving ML, imaging, and pharmacology computations</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="resume-section">
+          <h3>Projects</h3>
+          <div class="job">
+            <h4>Bias Induced News Generation with LLMs <span class="loc">Los Angeles, CA</span></h4>
+            <p class="meta">Software Engineer &middot; May 2026</p>
+            <ul>
+              <li>Built a reproducible evaluation pipeline deployed on AWS EC2 with PyTorch, and Hugging Face to measure how politically skewed fine-tuning data affected news generated by multiple LLMs (Mistral, GPT-4o, Deepseek, Qwen)</li>
+              <li>Developed data preprocessing and finetuning pipelines, and trained a custom RoBERTa classifier to evaluate generated texts and score analytical errors</li>
+            </ul>
+          </div>
+          <div class="job">
+            <h4>Accessibility-Focused AI Chrome Extension <span class="loc">Los Angeles, CA</span></h4>
+            <p class="meta">Project Manager / Engineer &middot; February 2026</p>
+            <ul>
+              <li>Built and deployed a React and JavaScript Chrome Extension in 24 hours that extracted webpage content, generated summaries, and answered page-grounded questions through Node.js REST APIs connected to GPT-4o model.</li>
+              <li>Implemented read-aloud functionality with the Web Speech API and keyboard shortcuts/hot-keys through the Chrome Commands API to support an accessible browsing experience</li>
+            </ul>
+          </div>
+          <div class="job">
+            <h4>Stock Sentiment Tracker <span class="loc">Los Angeles, CA</span></h4>
+            <p class="meta">Software Engineer &middot; November 2025</p>
+            <ul>
+              <li>Fine-tuned FinBERT via Hugging Face, adapting it for informal finance text using Twitter-RoBERTa and training on social-market language filled with emojis and other modern terms</li>
+              <li>Built Flask endpoints to serve sentiment predictions and used SHAP to identify which words influenced model outputs</li>
+            </ul>
+          </div>
         </div>
 
         <div class="resume-section">
@@ -186,69 +246,6 @@ export const apps: Record<string, AppData> = {
           <div class="job">
             <h4>University of California, Los Angeles <span class="loc">Los Angeles, CA</span></h4>
             <p class="meta">Bachelor of Science, Biochemistry &middot; September 2017 &ndash; December 2019</p>
-          </div>
-        </div>
-
-        <div class="resume-section">
-          <h3>Technical Skills</h3>
-          <ul class="skills">
-            <li><strong>Languages:</strong> Python, Java, C++, C, JavaScript, TypeScript, SQL, Go</li>
-            <li><strong>ML &amp; NLP:</strong> PyTorch, TensorFlow, Hugging Face Transformers, BERT, scikit-learn</li>
-            <li><strong>Data &amp; Evaluation:</strong> Pandas, NumPy, VADER, Model Evaluation</li>
-            <li><strong>Engineering:</strong> Flask, FastAPI, Node.js, React, PostgreSQL, MySQL, MongoDB, Docker, AWS, Git</li>
-          </ul>
-        </div>
-
-        <div class="resume-section">
-          <h3>Projects</h3>
-          <div class="job">
-            <h4>Bias Induced News Generation with LLMs <span class="loc">PyTorch, Hugging Face, BERT</span></h4>
-            <p class="meta">Machine Learning Engineer &middot; May 2026</p>
-            <ul>
-              <li>Engineered an automated evaluation pipeline to expose and quantify political bias across multiple LLM architectures.</li>
-              <li>Built a pipeline for the ingestion, cleaning, and labeling of multi-partisan news snippets for LLM evaluation.</li>
-              <li>Processed 14,000 biased articles to automate the generation and scoring of 1,700 test cases.</li>
-            </ul>
-          </div>
-          <div class="job">
-            <h4>Stock Sentiment Tracker <span class="loc">Python, Hugging Face, Flask, SHAP</span></h4>
-            <p class="meta">Machine Learning Engineer &middot; November 2025</p>
-            <ul>
-              <li>Fine-tuned FinBERT for informal finance text by relabeling StockEmotions with Twitter-RoBERTa and training on social-market language.</li>
-              <li>Improved accuracy on informal finance text by 57% against baseline setup, then benchmarked using MSE and MAE.</li>
-              <li>Implemented SHAP to inspect model predictions and identify finance-specific sentiment cues that were easy to miss in standard language models.</li>
-            </ul>
-          </div>
-          <div class="job">
-            <h4>Weenix Operating System Kernel Development <span class="loc">C, x86 Assembly, GNU Make, QEMU</span></h4>
-            <p class="meta">Software Engineer &middot; February 2025</p>
-            <ul>
-              <li>Engineered foundational system components for a 32-bit architecture.</li>
-              <li>Developed process and thread life-cycle management, context switching, thread bootstrap, and scheduler queue primitives.</li>
-              <li>Integrated software with emulated hardware (QEMU) using C and Assembly, navigating complex system constraints, physical memory allocation, and concurrency.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="resume-section">
-          <h3>Experience</h3>
-          <div class="job">
-            <h4>Wasabi Cloud Technologies &mdash; AI Engineering Intern (Remote) <span class="loc">Boston, MA</span></h4>
-            <p class="meta">June 2025 &ndash; August 2025</p>
-            <ul>
-              <li>Built a React dashboard that brought customer requests, upload failures, and deploy notes into one escalation timeline, reducing median incident handoff time by 23%.</li>
-              <li>Created labeled datasets from historical support tickets, customer notes, and internal business text to improve AI model accuracy on company-specific language and recurring issue patterns.</li>
-              <li>Developed a first-pass AI triage workflow that converted ticket text and error patterns into plain-language diagnostic notes for support teams.</li>
-            </ul>
-          </div>
-          <div class="job">
-            <h4>University of California, Los Angeles &mdash; Research Operations Manager <span class="loc">Los Angeles, CA</span></h4>
-            <p class="meta">January 2019 &ndash; December 2023</p>
-            <ul>
-              <li>Led rollout of GPU-backed compute and multi-vendor lab systems, translating wet-lab constraints into implementation plans, integration tests, and researcher onboarding.</li>
-              <li>Developed architecture and deployed automated workflows, imaging, and compute platforms through technical proposals and systems planning.</li>
-              <li>Contributed to 5 peer-reviewed publications involving ML implementation, imaging pipelines, and research infrastructure.</li>
-            </ul>
           </div>
         </div>
 
@@ -347,7 +344,7 @@ export const apps: Record<string, AppData> = {
     content: `
       <div class="window-content-inner">
         <h2>Get in Touch</h2>
-        <p>Best reached by email. Always happy to talk ML systems, NLP eval, or applied AI roles.</p>
+        <p>Best reached by email. Always happy to talk AI/ML, automated systems, or backend development roles.</p>
         <ul class="contact-list">
           <li><strong>Email:</strong> <a href="mailto:brandonh4n@gmail.com">brandonh4n@gmail.com</a></li>
           <li><strong>Website:</strong> <a href="https://www.thehanbrand.dev" target="_blank" rel="noopener">thehanbrand.dev</a></li>
